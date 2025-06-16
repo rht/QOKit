@@ -19,7 +19,7 @@ def prepare_f(
             return -1 * precomputed_objectives.dot(probabilities)
         return precomputed_objectives.dot(probabilities)
 
-    def f_ours(*args):
+    def f_ours(*args, return_probs=False):
         n_trotters = 1
         initial_state = None
         parameterization = "freq"
@@ -32,6 +32,8 @@ def prepare_f(
         else:
             sv = np.asarray(sv)
         probs = np.abs(sv) ** 2
+        if return_probs:
+            return probs
         return compute_objective_from_probabilities(probs)
 
     return f_ours
